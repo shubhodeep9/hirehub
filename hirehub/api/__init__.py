@@ -11,7 +11,7 @@ class GitAPI:
 
         self.endpoint = "https://api.github.com"
 
-    def search_users(self, location = 'India', language = 'any', sort_by = 'followers', order = 'desc'):
+    def search_users(self, page = 1, location = 'India', language = 'any', sort_by = 'followers', order = 'desc'):
         """Searches users using github api and gives list of users.
         :arg location: Desired location for target developers.
         :arg language: Specific programming language filter.
@@ -28,7 +28,8 @@ class GitAPI:
         payload = {
                 'q'     : q,
                 'sort'  : sort_by,
-                'order' : order
+                'order' : order,
+                'page'  : page
             }
 
         req = requests.get(users_endpoint,
