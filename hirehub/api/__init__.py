@@ -10,7 +10,6 @@ class GitAPI:
         """Constructs a GitAPI instance"""
 
         self.endpoint = "https://api.github.com"
-        self.type = "application/javascript"
 
     def search_users(self, location = 'India', language = 'any', sort_by = 'followers', order = 'desc'):
         """Searches users using github api and gives list of users.
@@ -28,10 +27,15 @@ class GitAPI:
 
         payload = {
                 'q'     : q,
-                'sort'  : sort_by
+                'sort'  : sort_by,
                 'order' : order
             }
 
-        requests.get(users_endpoint,
+        req = requests.get(users_endpoint,
                 params=payload)
+
+        if(req.status_code != 200):
+            return false
+
+        return req.json()
 
